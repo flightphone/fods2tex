@@ -465,7 +465,12 @@ namespace fods2tex
                 //нашли таблицу
                 txtRes += "\n\n\n";
 
-                texRes += "\n\\begin{table}[H]\n\\begin{adjustbox}{max width=\\textwidth}\n\\begin{tabular}{";
+                string notadj = "";
+                if (tab.Attribute("adjust") != null)
+                {
+                    notadj = "%";
+                }
+                texRes += "\n\\begin{table}[H]\n" + notadj + "\\begin{adjustbox}{max width=\\textwidth}\n\\begin{tabular}{";
                 List<string> licol = new List<string>();
                 List<decimal> wdcol = new List<decimal>();
                 //Список колонок
@@ -703,9 +708,7 @@ namespace fods2tex
                 if (up_line != sp_line)
                     texRes += "\n\\hhline{" + up_line + "}";
 
-
-
-                texRes += "\n\\end{tabular}\n\\end{adjustbox}\n\\end{table}";
+                texRes += "\n\\end{tabular}\n" + notadj + "\\end{adjustbox}\n\\end{table}";
                 //break;
             }
 
